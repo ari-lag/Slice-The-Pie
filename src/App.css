@@ -1,0 +1,300 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+
+body{
+  background-color: #2E2E2E;
+  color: white;
+  font-size:14px;
+  margin-left: 8px;
+  margin-right: 8px;
+  font-weight: 500;
+}
+
+.page_container{
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+@media (min-width:450px){
+  .page_container{
+    max-width: 450px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+  }
+}
+
+p{
+  font-size: 12px;
+}
+
+h1, h2, h4{
+  text-align: center;
+}
+
+h2 {
+  margin-top: 30px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+h4 {
+  margin-top: 30px;
+  font-weight: 700;
+  font-size:19px;
+}
+
+
+.intro{
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-bottom: 65px;
+  font-weight: 400;
+
+}
+
+
+.btn_1{
+  display: flex;
+  justify-content: center;
+  padding-top: 35px;
+}
+
+
+.btn_2{
+  display: flex;
+  justify-content: center;
+  padding-top: 35px;
+  padding-bottom: 55px;
+}
+
+
+.btn, .btn_grey {
+  border: none;
+  padding: 10px 80px;
+  border-radius: 35px;
+  font-weight: 700;
+  font-size:20px;
+}
+
+.btn{
+  background-color: white;
+}
+.btn_grey{
+  background-color: #7F8187;
+  color: white;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+
+/* for stagebar */
+
+.stagebar{
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-around;
+}
+
+.function_row {
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
+
+/* For option  */
+
+.one_option{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center; 
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 15px;
+
+}
+.option_info{
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.option_input{
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1.5px solid white;
+  padding-bottom: 0.5px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.option_name{
+  max-width: 150px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 15px;
+  padding-right: 7px;
+  font-weight: 500;
+}
+
+
+.option_userinput{
+  background: transparent;
+  width: 25px;
+  text-align: center;
+  border: none;
+  color:white;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.option_dot{
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.percentages{
+  font-size: 15px;
+  color: #7F8187;
+}
+
+.total_row {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+#total_text{
+  margin-right: 8px;
+}
+
+#total_input{
+  color: #7F8187;
+  /* color: white; */
+  background: transparent;
+  width: 25px;
+  text-align: center;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+
+
+.graph_container{
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
+/* pop up info details */
+
+.popup{
+  max-width: 180px;
+  background-color:#71A8FF;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-top:8px;
+}
+
+.popup:after {
+  margin-top:8px;
+  content: "";
+  width: 10px;
+  height: 15px;
+  transform: rotate(-45deg);
+  background-color:#71A8FF;
+  position: absolute;
+  z-index: -1;
+  left: calc(50% - 4px);
+  top: -5px;
+}
+
+.steps{
+  margin-bottom: 60px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#step_bar{
+  margin-top: 30px;
+}
+
+#bartitles{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.Progressbar {
+  margin-top: 0px;
+  margin-left: 42px;
+  margin-right: 42px;
+  margin-bottom: 50px;
+}
+
+
+.indexedStep {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  background-color:#999999;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.indexedStep.accomplished {
+  background-color: #71A8FF;
+  color: #71A8FF;
+}
+
+#pieChart{
+  display: flex;
+  justify-content: center;
+}
+
+.here{
+  padding-left:2px;
+  font-size: 18px;
+}
+
+#top-title{
+  margin-top: 35px;
+}
