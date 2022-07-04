@@ -1,11 +1,22 @@
-## Design decisions
-* Title: We decide to change the title of the user input from "percentage" to "Available: 100%" As a way for users to keep track of how much percentage is left. The value will change according to the user input.
-* Text: We also remove the "%" from "Total%:" as it doesn't make sense to have two % here (Total% : 100%).
+Michelle McKenzie
+Jake Martin
+Arianna Rae-Lagman
+Dominik Barlow
 
-* Pie chart: We modify the PieChartClass file so that the text and the value are displayed under the chart.
+## React starter project, with D3
 
-## Resources:
-* We implement the progress bar using [react-step-progress-bar
-library](https://pierreericgarcia.github.io/react-steppi-progress-bar/)
-* For the info detail pop up we use the popup component from [Semantic UI](https://react.semantic-ui.com/)
-* The info icon is from [iconify](https://iconify.design/icon-sets/)
+This project is the Repl.it React starter project, with a D3 chart included on the page. 
+
+## Running React on Repl.it
+
+[React](https://reactjs.org/) is a popular JavaScript library for building user interfaces.
+
+[Vite](https://vitejs.dev/) is a blazing fast frontend build tool that includes features like Hot Module Reloading (HMR), optimized builds, and TypeScript support out of the box.
+
+Using the two in conjunction is one of the fastest ways to build a web app.
+
+### Getting Started
+- Hit run
+- Edit [App.jsx](#src/App.jsx) and watch it live update!
+
+By default, Repl.it runs the `dev` script, but you can configure it by changing the `run` field in the `.replit` file.

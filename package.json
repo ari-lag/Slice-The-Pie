@@ -7,18 +7,13 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@vitejs/plugin-react-refresh": "^1.1.0",
+    "express": "^4.17.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "react-step-progress-bar": "^1.0.3",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^2.0.3",
     "vite": "^2.2.1"
-  },
-  "devDependencies": {
-    "@iconify/icons-ant-design": "^1.1.0",
-    "@iconify/react": "^1.1.4"
   }
 }

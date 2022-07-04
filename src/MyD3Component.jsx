@@ -1,64 +1,140 @@
-import React, { useRef, useEffect } from 'react';
-/* Component that contains a D3 chart */
+// credit to Professor Amenta for the source code from lecture for the pie chart and the interactions
+
+
+ 
+
 
 function MyD3Component (props) {
-    /* The useRef Hook creates a variable that "holds on" to a value across rendering
-       passes. In this case it will hold our component's SVG DOM element. It's
-       initialized null and React will assign it later (see the return statement) */
-    const d3Container = useRef(null);
+  
+    // gets connected to svg drawn by React by variable name and its ref attribute
+    let d3Container = React.createRef(null);
+     
+    let dimensions = ({
+      width: props.width ? props.width : 200,
+      height: props.height ? props.height : 200,
+      padding: props.padding ? props.padding : 50
+    });
+ 
+    const data = props.data;
+    const name = props.name;
+    
+    let pie = d3.pie()
+                .sort(null)
+                .value(d => d.value);
 
-    /* The useEffect Hook is for running side effects outside of React,
-       for instance inserting elements into the DOM using D3 */
-    useEffect(
-        () => {
-            if (props.data && d3Container.current) {
+    let arc = d3.arc()
+                .innerRadius(0)
+                .outerRadius(Math.min(dimensions.width, dimensions.height) / 2 - 1);
+  
+    
 
-                // the container holding our D3 chart
-                const svg = d3.select(d3Container.current);
 
-                // Bind D3 data
-                const update = svg
-                    .append('g')
-                    .selectAll('rect')
-                    .data(props.data);
+  // init code - only run on startup
+  useEffect(function() {
 
-                // Enter new D3 elements
-                update.enter()
-                    .append('rect')
-                    .attr('x', (d, i) => i * 25)
-                    .attr('y', (d)=> 100-(d*15))
-                    .attr("fill", "steelblue")
-                    .attr("width",20)
-                    .attr("height",(d) => d*15);
+      if (!(d3Container.current && data)) 
+        return;
+      
+    let chartSvg = d3.select(d3Container.current);
 
-                // Update existing D3 elements
-                update
-                    .attr('x', (d, i) => i * 25)
-                    .attr("height",(d) => d*15);
+    //.attr('id', "pieChart")
+    chartSvg.append('g')
+      .attr('id',name)
+      .attr('class', 'chart-content')
+      .attr('transform', `translate(
+      ${dimensions.width / 2 + dimensions.padding},
+      ${dimensions.height/2 + dimensions.padding})`);
+    },[]);
 
-                // Remove old D3 elements
-                update.exit()
-                    .remove();
-            }
-        },
+  // update function
+  useEffect(function() {
+    
+    if (!(d3Container.current && data)) 
+        return;
+        
+    
+    const valueSum = d3.sum(data, d => d.value);
+    if (100 - valueSum > 0) {
+      console.log("EMPTY UPDATE!!!");
+      data.push({
+        name: '$empty',
+        value: (100 - valueSum),
+        color: '#7f8187'
+      });
+    }
 
-        /*
-            useEffect has a dependency array (below). It's a list of dependency
-            variables for this useEffect block. The block will run after mount
-            and whenever any of these variables change. We still have to check
-            if the variables are valid, but we do not have to compare old props
-            to next props to decide whether to rerender.
-        */
-        [props.data, d3Container.current])
+    const arcs = pie(data);
 
-    return (
+    //const g = d3.select("#pieChart");
+    const g = d3.select("#"+name);
+    g.selectAll('path')
+        .data(arcs)
+        .join('path')
+        .on('mouseover', (event, d) => onSliceOver(event, d))
+        .on('mouseout', (event, d) => onSliceOut(event, d))
+        //.transition().duration(500)
+        .attr('fill', d => d.data.color)
+        .attr('transform', d => d.data.name == '$empty' ? 'scale(0.95)' : '')
+        .attr('d', arc);
+    }, [props, d3Container.current ]
+  ); // useEffect update function
+
+  
+  function onSliceOver(event, d) {
+    if (d.data.name == '$empty')
+      return;
+
+    let pointer = d3.pointer(event);
+
+    d3.select(event.currentTarget)
+      //.transition().duration(200)
+      .attr('transform', 'scale(1.1)')
+
+    //const g = d3.select("#pieChart");
+    const g = d3.select("#"+name);
+    g.select('#chart-tooltip').remove();
+    g.append('text')
+        .attr('x', pointer[0] )
+        .attr('y', pointer[1] - 20)
+        //.attr('fill', getColorValue(d.data.color) > 150 ? '#000000' : '#ffffff')
+        .attr('fill', '#ffffff')
+        .attr("font-weight",function(d,i) {return 500;})
+        .attr('text-anchor', 'middle')
+        .attr('id', 'chart-tooltip')
+        .text(`${d.data.name} ${d.data.value.toFixed(2)}%`);
+  }
+
+  function onSliceOut(event, d) {
+    if (d.data.name == '$empty')
+      return;
+
+    d3.select(event.currentTarget)
+      //.transition().duration(200)
+      .attr('transform', 'scale(1)')
+
+     const g = d3.select("#pieChart");
+     g.select('#chart-tooltip').remove();
+  }
+
+  function getColorValue(color) {
+    let sumVal = 0;
+    for (let i = 1; i < color.length; i+=2) {
+      let val = parseInt(`0x${color[i]}${color[i+1]}`);
+      sumVal += val;
+    }
+    sumVal /= 3;
+    return sumVal;
+  }
+
+  return (
         <svg
-            className="d3-component"
-            width={400}
-            height={200}
+            className="pie-chart"
+            width={dimensions.width + 2*dimensions.padding}
+            height={dimensions.height + 2*dimensions.padding}
             ref={d3Container}
         />
     );
 }
+
 
 export default MyD3Component;
